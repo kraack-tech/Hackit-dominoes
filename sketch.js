@@ -9,6 +9,9 @@ var Render = Matter.Render;
 var World = Matter.World;
 var Bodies = Matter.Bodies;
 var Composites = Matter.Composites;
+var bodies = Matter.bodies;
+var Composite = Matter.Composite;
+
 
 var engine;
 var ball;
@@ -49,10 +52,22 @@ function draw() {
 /////////////////////////////////////////////////////////
 function setupDominoes(){
   // your code here
+  size=50;
+  stack = Composites.stack(100, 300, 40, 1, 15, 100, function(x, y) {
+    return Bodies.rectangle(x, y, size /5, size*4);
+  });
+
+  World.add(engine.world, [stack]);
+
+  dominoes = Matter.Composite.allBodies(stack);
 }
 /////////////////////////////////////////////////////////
 function drawDominoes(){
   // your code here
+  fill(255);
+  for (var i = 0; i < dominoes.length; i++) {
+    drawVertices(stack.bodies[i].vertices);
+}
 }
 /////////////////////////////////////////////////////////
 // ********* HELPER FUNCTIONS **********
